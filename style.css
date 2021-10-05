@@ -1,0 +1,172 @@
+border-color: #DCDCDC;
+
+background-color: #EEEEEE;
+hover-background-color: #DEDEDE;
+selected-background-color: #FFFFFF;
+
+text-color: #666;
+hover-text-color: #444;
+selected-text-color: #666;
+
+/* Pen-specific styles */
+html, body, section {
+  height: 100%;
+}
+
+body {
+  color: black;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  line-height: 150%;
+  text-shadow: 0 2px 2px #b6701e;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 0 0 0.75rem 0;
+}
+
+/* Pattern styles */
+.container {
+  display: flex;
+}
+
+.left-half {
+  background-color: white;
+  flex: 1;
+  padding: 1rem;
+}
+
+.right-half {
+  background-color: white;
+  flex: 1;
+  padding: 1rem;
+}
+
+.tabbed-module {
+	padding: 20px;
+	font-family: Arial, sans-serif;
+	max-width: 600px
+}
+.tabbed-module nav {
+		height: 36px;
+		overflow: visible;
+	  display: block;
+	margin-bottom: 5px;
+	}
+.tabs-content > div {
+	display: none;
+	&.selected {
+		display: block;
+	}
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+.tabs {
+	border-bottom: 1px solid $border-color;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-end;
+	& > li {
+		border: 1px solid $border-color;
+		border-bottom-width: 0;
+		background: $background-color;
+		margin: 0 0 0 5px;
+		border-radius: 3px 3px 0 0;
+
+		& > a {
+			font-weight: bold;
+			text-decoration: none;
+			display: block;
+			padding: 10px 15px 8px;
+			text-align: center;
+			color: $text-color;
+			position: relative;
+		}
+
+		&:hover {
+			background: $hover-background-color;
+			& > a {
+				background: $hover-background-color;
+				color: $hover-text-color;
+			}
+		}
+
+		&.selected {
+			background: $selected-background-color;
+			& > a {
+				background: $selected-background-color;
+				color: $selected-text-color;
+				top: 1px;
+			}
+		}
+	}
+}
+
+@media (max-width: 766px) {
+	.tabs {
+		border: 1px solid $border-color;
+		border-radius: 3px;
+		& > li {
+			flex: 1 1 100%;
+			margin: 0;
+			border: none;
+			display: none;
+			z-index: 10;
+			order: 1;
+			border-radius: 0;
+			& > a {
+				text-align: left;
+				margin: 1px;
+			}
+			&.selected {
+				order: 0;
+				display: block;
+				padding-right: 30px;
+				& > a {
+					top: 0;
+					position: relative;
+					&:after {
+						width: 0;
+						height: 0;
+						border-style: solid;
+						border-width: 5px 5px 0 5px;
+						border-color: $selected-text-color transparent transparent transparent;
+						content: "";
+						display: block;
+						position: absolute;
+						right: -30px;
+						top: 0;
+						margin: 15px;
+					}
+				}
+			}
+		}
+		// browser hover
+		//&:hover, 
+		// mobile support
+		&.active {
+			& > li {
+				display: block;
+				&:last-of-type {
+					border-bottom: 0;
+				}
+				&.selected {
+					padding-right: 0;
+					& > a:after {
+						border: none;
+					}
+				}
+			}
+		}
+	}
+}
