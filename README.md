@@ -1,3 +1,4 @@
-# Adjacent-Window
+For the requirements to be installed 
+1) Execute : **pip install requirements.txt**
 
-README [to be updated as project goes along]
+Run the main.py file to start the local host server
