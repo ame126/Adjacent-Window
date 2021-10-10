@@ -1,3 +1,5 @@
+
+
 $(document).on('click', '.tabs > li > a', function(e) {
 	var $parent = $(this).parent();
 	if ($parent.is('.selected')) {
