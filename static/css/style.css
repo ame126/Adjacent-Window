@@ -49,7 +49,10 @@ h1 {
 	flex: 1;
 	padding: 1rem;
 }
-
+#style_nav{
+	margin:auto;
+	padding:inherit
+}
 .tabbed-module {
 	padding: 10px;
 	font-family: Arial, sans-serif;
@@ -161,4 +164,18 @@ img {
 		top: 0;
 		margin: 15px;
 	}
+}
+
+.btn-info{
+	float: right;
+	margin-right: 5%;
+}
+
+
+#upload_file_div {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
 }
