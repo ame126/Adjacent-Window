@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-> 
-> <header>
-> <meta charset="UTF-8">
-> <title>Homepage.html</title>
-> <link rel="stylesheet" type="text/css" href="./style.css"/>
-<link rel="stylesheet" href="js.js" type="text/Javascript">
-> </header>
+ 
+<header>
+    <meta charset="UTF-8">
+    <title>Homepage.html</title>
+    <!-- <link rel="stylesheet" type="text/css" href="./style.css"/> -->
+    <script type="text/javascript" src="js.js"></script>>
+</header>
 
 <head>
 	<script type="text/javascript" src="https://unpkg.com/gethue/lib/components/SqlScratchpadWebComponent.js"></script>
@@ -20,9 +20,39 @@
       <h1>Presentation Slides Box</h1>
       <br>
 			
-			<iframe src="https://rutgersconnect-my.sharepoint.com/personal/ame126_echo_rutgers_edu/_layouts/15/Doc.aspx?sourcedoc={08c35387-0495-4649-af8b-dc262e02f2c2}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+			<iframe src="https://rutgersconnect-my.sharepoint.com/personal/sn671_scarletmail_rutgers_edu/_layouts/15/Doc.aspx?sourcedoc={f5fec9ed-0b13-4fb6-b0f0-c804f77595db}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+
+			<!-- <p>Insert new media content</p>
+			<form id="insert_content" class="form">
+				<input type="radio" name="content_type" id="image" value="image"> <label for="image">Image</label> <br>
+				<input type="radio" name="content_type" id="video" value="video"> <label for="video">Video</label> <br>
+				<input type="radio" name="content_type" id="doc" value="doc"> <label for="doc">Document</label> <br>
+				<input type="radio" name="content_type" id="code" value="code"> <label for="code">Code Snippet</label> <br><br>
+				<label for="content_link"> Insert Content Embedding Link </label> <br>
+				<input type="text" name="content_link" id="content_link"> 
+				<input type="submit" value="submit">
+			</form>
+			<br><br><br>
+			<script>
+			  const insert_content = document.getElementbyId("insert_content");
+				
+				insert_content.addEvent.Listener("submit", (s) => {
+					//s.preventDefault();
+					//console.log("Form has been submitted!");
+								var link = document.getElementById("insert_content0");
+								if(document.getElementById('image').checked){
+						document.getElementById("image1").src = link;
+					}
+					else if(document.getElementById('video').checked){
+						
+					}
+				else if(document.getElementById('doc').checked)
+					
+				});
+				
+			</script> -->
 			
-			<p>This is where the normal presentation slide will be and include the links to shift through the adjacent window tabs.</p>
+			<!-- <p>This is where the normal presentation slide will be and include the links to shift through the adjacent window tabs.</p>
 			<br>
 			<p>Content:</p>
 			<li class="selected"> <a href="#image1">Image</a></li>
@@ -40,7 +70,7 @@
 				<p>Embed python editor and interpreter from Trinket.io into iframe</p>
 				<p>Can be used to embed a full wesite containing all relevant content.</p>
 				<p>SQL scratchpad: https://docs.gethue.com/developer/components/scratchpad/</p>
-				<p></p>
+				<p></p> -->
 	</li>
     </article>
   </div>
@@ -64,28 +94,108 @@
 </nav>
 <div class="tabs-content">
 	<div id="image1" class="selected">
-		<img alt="Hill Center" src="https://www.cs.rutgers.edu/images/computer-science.jpg" />
+		<img id ="image1pic" alt="Hill Center" src="https://www.cs.rutgers.edu/images/computer-science.jpg" /> <br>
+		<label for="image_link"> Insert Content Embedding Link </label> <br>
+		<input type="text" name="image_link" id="image_link"> 
+		<button type="button" id="image_button" onclick="changeImage()"> Change </button>
 	</div>
+	
+	<script>
+		
+		function changeImage(){
+			var image_content = document.getElementById("image_link").value;
+			var image = document.getElementById("image1pic");
+			image.src = image_content;
+		}
+		
+		
+		/*const image_content = document.getElementbyId("image_link");
+		
+		function imageFunc() {
+			document.getElementById("image1").src = "image_content";		
+		}*/
+		
+	</script>
+	
 	<div id="video2">
-		<iframe width="420" height="315"
+		<iframe id ="vid1" width="100%" height="315"
 src="https://www.youtube.com/embed/XQAFtePwIf8">
 </iframe>
+		<label for="video_link"> Insert Content Embedding Link </label> <br>
+		<input type="text" name="video_link" id="video_link"> 
+		<button type="button" id="video_button" onclick="changeVideo()"> Change </button>
 	</div>
+	
+	<script>
+		
+		function changeVideo(){
+			var video_content = document.getElementById("video_link").value;
+			var video = document.getElementById("vid1");
+			video.src = "https://www.youtube.com/embed/" + video_content;
+		}
+	</script>
+	
 	<div id="pdf3">
-		<iframe src="https://rutgersconnect-my.sharepoint.com/personal/ame126_echo_rutgers_edu/_layouts/15/Doc.aspx?sourcedoc={3f37cd62-2fe4-4336-ab9e-1a589d0aad50}&amp;action=embedview" width="476px" height="288px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+		<iframe id="doc1" src="https://rutgersconnect-my.sharepoint.com/personal/ame126_echo_rutgers_edu/_layouts/15/Doc.aspx?sourcedoc={3f37cd62-2fe4-4336-ab9e-1a589d0aad50}&amp;action=embedview" width="100%" height="600px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+		<!--<label for="doc_link"> Insert Content Embedding Link </label> <br>
+		<input type="text" name="doc_link" id="doc_link"> 
+		<button type="button" id="doc_button" onclick="changeDoc()"> Change </button>-->
 	</div>
+	
+	<script>
+		
+		function changeDoc(){
+			var doc_content = document.getElementById("doc_link").value;
+			var doc = document.getElementById("doc1");
+			doc.src = "https://rutgersconnect-my.sharepoint.com/personal/ame126_echo_rutgers_edu/_layouts/15/Doc.aspx?" + doc_content;
+		}
+	</script>
+	
+	
 	<div id="code4">
-		<!--<pre><code>&lt;strong&gt;FOO&lt;/strong&gt;</code></pre>-->
+		<div class="tabbed-module">
+<nav>
+<ul class="tabs">
+	<li class="selected">
+		<a href="#code1">Python</a>
+	</li>
+	<li>
+		<a href="#code2">Java</a>
+	</li>
+	<li>
+		<a href="#code3">SQL</a>
+	</li>
+	<li>
+		<a href="#code5">C/C++</a>
+	</li>
+</ul>
+</nav>
+			<div class="tabs-content">
+	<div id="code1" class="selected">
 		<iframe src="https://trinket.io/embed/python/8dd1f8bb26" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-		
+	</div>
+				
+				<div id="code2">
 		<iframe src="https://www.jdoodle.com/iembed/v0/hyN" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-		
+	</div>
+				
+				<div id="code3">
 		<div style="position: absolute; height: 100%; width: 50%">
     <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
-  </div>
+	</div>
+					
+					
+		<!--<pre><code>&lt;strong&gt;FOO&lt;/strong&gt;</code></pre>-->
+		
+		<!-- <div style="position: absolute; height: 100%; width: 50%">
+    <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
+  </div> -->
 		<!-- SELECT * FROM Students limit 5; -->
 		
 		<!--<img alt="image 4" src="https://pixabay.com/static/uploads/photo/2010/12/06/22/fighter-jet-1013_960_720.jpg" />-->
+	</div>
+				<div id="code5">
+		<iframe src="https://www.jdoodle.com/embed/v0/3ZHu" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 	</div>
 </div>
 </div>
