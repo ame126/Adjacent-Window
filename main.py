@@ -1,14 +1,15 @@
 from flask import Flask, render_template, session, request, redirect, url_for, jsonify, make_response
 import flask
-import flask_login
+import mysql.connector
+from mysql.connector.errors import Error
 from datetime import timedelta
 from werkzeug.utils import secure_filename
-
+from config import Config
 import os
+import json
 
 '''Initialise the flask app '''
 app = Flask(__name__)
-
 
 app.config['BOOTSTRAP_BTN_STYLE'] = 'primary'
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -18,11 +19,121 @@ UPLOAD_FOLDER = '\\storage'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
 logged_in = False
 
+config_object = Config()
 login_cred = {
     "testuser1": "test123",
     "testuser2": "test456",
     "testuser3": "test789"
 }
+
+
+def create_db():
+    try:
+        mydb = mysql.connector.connect(
+            host="127.0.0.1",
+            user=config_object.dbuser,
+            password=config_object.dbpassword,
+            port=config_object.dbport,
+            auth_plugin=config_object.authplugin,
+            database=config_object.database
+        )
+
+        cursor = mydb.cursor()
+        query = "Select * from " + config_object.database + ";"
+        cursor.execute(query)
+        results = cursor.fetchall()
+
+    except Error as err:
+        print("Error code: ", err.errno)
+        print("Message", err.msg)
+    finally:
+        mydb.close()
+
+
+def convert_to_string(data):
+    for keys in data:
+        temp_val = "*#*".join(data[keys])
+        data[keys] = "'" + temp_val + "'"
+    return data
+
+
+def record_exists(username):
+    try:
+        mydb = mysql.connector.connect(
+            host="127.0.0.1",
+            user=config_object.dbuser,
+            password=config_object.dbpassword,
+            port=int(config_object.dbport),
+            auth_plugin=config_object.authplugin,
+            database=config_object.database
+        )
+
+        cursor = mydb.cursor()
+        query = "select count(*) from userfiles where username = '" + username + "';"
+        cursor.execute(query)
+        results = cursor.fetchall()
+        mydb.close()
+        return len(results) > 0
+    except:
+        print("Error for record check")
+
+
+@app.route("/save_files", methods=['POST'])
+def insert_record():
+    data = request.get_json()
+
+    data_transformed = convert_to_string(data)
+
+    username = session['username']
+    if not record_exists(username):
+        # insert
+        try:
+            mydb = mysql.connector.connect(
+                host="127.0.0.1",
+                user=config_object.dbuser,
+                password=config_object.dbpassword,
+                port=int(config_object.dbport),
+                auth_plugin=config_object.authplugin,
+                database=config_object.database
+            )
+
+            cursor = mydb.cursor()
+            query = "INSERT INTO userfiles" + " (username, images, videos, documents)" + " VALUES (" + \
+                    "'" + session['username'] + "'," + data_transformed['images'] + "," + data_transformed[
+                        'videos'] + "," + \
+                    data_transformed['docs'] + ");"
+            cursor.execute(query)
+            results = cursor.fetchall()
+            mydb.close()
+            return jsonify(sucess=True)
+        except Error as err:
+            print("Error code: ", err.errno)
+            print("Message", err.msg)
+    else:
+        # update record
+        print("Update record for username")
+        try:
+            mydb = mysql.connector.connect(
+                host="127.0.0.1",
+                user=config_object.dbuser,
+                password=config_object.dbpassword,
+                port=int(config_object.dbport),
+                auth_plugin=config_object.authplugin,
+                database=config_object.database
+            )
+
+            cursor = mydb.cursor()
+            query = "UPDATE userfiles " + "SET images = " + data_transformed['images'] + ", videos = " + \
+                    data_transformed[
+                        'videos'] + ", documents = " + data_transformed['docs'] + "WHERE username = '" + username + "';"
+
+            cursor.execute(query)
+            # results = cursor.fetchall()
+            mydb.close()
+
+        except:
+            print("Error updating")
+        return jsonify(success=True)
 
 
 def clear_session():
@@ -34,10 +145,21 @@ def clear_session():
     session.pop('username', default=None)
 
 
+def get_mysql_connector():
+    mydb = mysql.connector.connect(
+        host="127.0.0.1",
+        user=config_object.dbuser,
+        password=config_object.dbpassword,
+        port=int(config_object.dbport),
+        auth_plugin=config_object.authplugin,
+        database=config_object.database
+    )
+
+    return mydb
+
+
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    global logged_in
-    logged_in = True
     if request.method == 'POST':
         username = request.form.get('username')  # access the data inside
         password = request.form.get('password')
@@ -50,7 +172,14 @@ def login():
             return render_template('login.html', message="Invalid username/password")
         else:
             flask.flash("Logged in Successfully")
-            return render_template("index.html")
+            # retrieve data of the user
+            mydb = get_mysql_connector()
+            query = "SELECT images, videos, documents from userfiles WHERE username = '" + session['username'] + "';"
+            cursor = mydb.cursor()
+            cursor.execute(query)
+            results = cursor.fetchall()
+            data = {'images': results[0][0], 'videos': results[0][1], 'documents': results[0][2]}
+            return render_template("index.html", data=json.dumps(data))
     else:
         return render_template('login.html')
 
@@ -95,7 +224,7 @@ def handle_bad_request(e):
     return render_template("error.html")
 
 
-@app.route('/signup', methods = ['POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
     if request.method == "POST":
         username = request.form['username']
@@ -104,10 +233,10 @@ def signup():
         if username in session:
             return render_template('login.html', message="Username already signedin")
         else:
-            #new user
+            # new user
             session['username'] = username
             login_cred[username] = password
-            return render_template("index.html", message = "Successfully registered")
+            return render_template("index.html", message="Successfully registered")
 
 
 @app.route('/', methods=['GET', 'POST'])
