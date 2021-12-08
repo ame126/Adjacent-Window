@@ -34,7 +34,7 @@ h1 {
 }
 
 /* Pattern styles */
-.container {
+#container_style {
 	display: flex;
 }
 

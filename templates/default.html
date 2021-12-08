@@ -10,205 +10,207 @@
 </head>
 
 <body>
-<div id ="save_div" ><button id="save_files"class="btn btn-info active" role="button" aria-pressed="true" >Save</button></div>
-<div id ="retrieve_div" ><button id="retrieve_files"class="btn btn-info active" role="button" aria-pressed="true" >Retrieve</button></div>
-<section class="container">
-
-    <div class="left-half">
-
-        <article>
-            <!--<h1>Presentation Slides Box</h1>-->
-            <br>
-            <script>
-                function changePPT(){
-                    var ppt_content = document.getElementById('ppt_link').value;
-                    ppt_content = ppt_content.replace('350px','100%');
-                    ppt_content = ppt_content.replace('221px','500px');
-                    ppt_content = ppt_content.replace('<iframe', '<iframe id = "ppts"')
-                    var ppt = document.getElementById('ppts');
-                    ppt.outerHTML = ppt_content;
-                    ppt.style.width="100%";
-                    ppt.style.height="500px";
-
-                }
-            </script>
-            <label for="ppt_link"> Insert Microsoft 365 Embedding Code </label> <br>
-            <input type="text" name="ppt_link" id="ppt_link">
-            <button type="button" id="ppt_button" onclick="changePPT()"> Change </button>
-            <iframe id="ppts" src="about:blank" width="100%" height="0px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>        </article>
+<div class = "container">
+    <div class = "row">
+        <div class="col align-self-end">
+            <div id ="save_div" ><button id="save_files"class="btn btn-info active" role="button" aria-pressed="true" >Save</button></div>
+            <div id ="retrieve_div" ><button id="retrieve_files"class="btn btn-info active" role="button" aria-pressed="true" >Retrieve</button></div>
+        </div>
     </div>
-    </article>
-    <div class="right-half">
-        <div class="tabbed-module">
-            <nav>
-                <ul class="tabs">
-                    <li class="selected">
-                        <a href="#image1">📷 Image</a>
-                    </li>
-                    <li>
-                        <a href="#video2">🎥 Video</a>
-                    </li>
-                    <li>
-                        <a href="#pdf3">📰 Word Doc</a>
-                    </li>
-                    <li>
-                        <a href="#code4">⌨ Code</a>
-                    </li>
-                </ul>
-            </nav>
+    <div class = row">
+        <div id = "container_style">
+            <div class = "col-sm-6">
+                <div class="left-half">
 
-            <div class="tabs-content">
-                <div id="image1" class="selected">
+                    <!--<h1>Presentation Slides Box</h1>-->
                     <br>
-                    <br>
-                    <img id ="images" src="" /> <br>
-                    <label for="image_link"> Insert Image Link (.png .jpg .gif) </label> <br>
-                    <input type="text" name="image_link" id="image_link">
-                    <button type="button" class = "conbutton" id="image_button" onclick="changeImage()"> Change </button>
-                </div>
+                    <script>
+                        function changePPT(){
+                            var ppt_content = document.getElementById('ppt_link').value;
+                            ppt_content = ppt_content.replace('350px','100%');
+                            ppt_content = ppt_content.replace('221px','500px');
+                            ppt_content = ppt_content.replace('<iframe', '<iframe id = "ppts"')
+                            var ppt = document.getElementById('ppts');
+                            ppt.outerHTML = ppt_content;
+                            ppt.style.width="100%";
+                            ppt.style.height="500px";
 
-                <script>
-
-                    function changeImage(){
-                        var image_content = document.getElementById("image_link").value;
-                        var image = document.getElementById("images");
-                        image.src = image_content;
-                    }
-
-                </script>
-                <div id="video2">
-                    <br>
-                    <br>
-                    <iframe id ="videos" width="100%" height="0px" src=""></iframe>
-                    </iframe>
-                    <label for="video_link"> Insert Youtube Video ID </label> <br>
-                    <input type="text" name="video_link" id="video_link">
-                    <button type="button" class = "conbutton" id="content_button" onclick="changeVideo()"> Change </button>
-                </div>
-
-                <script>
-
-                    function changeVideo(){
-                        var video_content = document.getElementById("video_link").value;
-                        var video = document.getElementById("videos");
-                        video.style.height = "300px"
-                        video.src = "https://www.youtube.com/embed/" + video_content;
-
-                    }
-                </script>
-
-                <div id="pdf3">
-                    <br>
-                    <br>
-                    <!--****** changed default iframe height to 0px ******-->
-                    <iframe id="docs" src="" width="100%" height="0px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-                    <label for="doc_link"> Insert Microsoft 365 Embedding Code </label> <br>
-                    <input type="text" name="doc_link" id="doc_link">
-                    <button type="button" class = "conbutton" id="doc_button" onclick="changeDoc()"> Change </button>
-                </div>
-                <script>
-                    function changeDoc(){
-                        var doc_content = document.getElementById("doc_link").value;
-                        doc_content = doc_content.replace('476px','100%');
-                        doc_content = doc_content.replace('288px','600px');
-                        var doc = document.getElementById("docs");
-                        doc_content = doc_content.replace('<iframe', '<iframe id = "docs"')
-                        doc.outerHTML =  doc_content;
-                        doc.style.width="100%";
-                        doc.style.height="600px";
-                    }
-                </script>
-                <div id="code4">
-                    <br>
-                    <div class="tabbed-module">
-                        <nav>
-                            <ul class="tabs">
-                                <li class="selected">
-                                    <a href="#code1" >Python</a>
-                                </li>
-                                <li>
-                                    <a href="#code2">Java</a>
-                                </li>
-                                <li>
-                                    <a href="#code3">SQL</a>
-                                </li>
-                                <li>
-                                    <a href="#code5">C/C++</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <br>
-                        <div class="tabs-content">
-                            <div id="code1" class="selected">
-                                <iframe id='py1' src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-                                <label for="python_link"> Insert Content Embedding Link </label> <br>
-                                <input type="text" name="python_link" id="python_link">
-                                <button type="button" class="conbutton" id="python_button" onclick="changePython()"> Change </button>
-                            </div>
-
-                            <script>
-
-                                function changePython(){
-                                    var python_content = document.getElementById("python_link").value;
-                                    var python = document.getElementById("py1");
-                                    python.outerHTML = python_content;
-                                }
-                            </script>
-
-                            <div id="code2">
-                                <iframe id="ja1" src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-                                <label for="java_link"> Insert Content Embedding Link </label> <br>
-                                <input type="text" name="java_link" id="java_link">
-                                <button type="button" id="java_button" onclick="changeJava()"> Change </button>
-                            </div>
-
-                            <script>
-
-                                function changeJava(){
-                                    var java_content = document.getElementById("java_link").value;
-                                    var java = document.getElementById("ja1");
-                                    java.outerHTML = java_content;
-                                }
-                            </script>
-
-                            <div id="code3">
-                                <div style="position: absolute; height: 100%; width: 50%">
-                                    <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
-                                </div>
-
-
-                                <!--<pre><code>&lt;strong&gt;FOO&lt;/strong&gt;</code></pre>-->
-
-                                <!-- <div style="position: absolute; height: 100%; width: 50%">
-                            <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
-                          </div> -->
-                                <!-- SELECT * FROM Students limit 5; -->
-
-                                <!--<img alt="image 4" src="https://pixabay.com/static/uploads/photo/2010/12/06/22/fighter-jet-1013_960_720.jpg" />-->
-                            </div>
-                            <div id="code5">
-                                <iframe src="about:blank" id="cc" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-                                <label for="cc_link"> Insert Content Embedding Link </label> <br>
-                                <input type="text" name="cc_link" id="cc_link">
-                                <button type="button" id="cc_button" onclick="changeCC()"> Change </button>
-                            </div>
-
-                            <script>
-
-                                function changeCC(){
-                                    var cc_content = document.getElementById("cc_link").value;
-                                    var cc = document.getElementById("cc");
-                                    cc.outerHTML = cc_content;
-                                }
-                            </script>
-                        </div>
-                    </div>
+                        }
+                    </script>
+                    <label for="ppt_link"> Insert Microsoft 365 Embedding Code </label> <br>
+                    <input type="text" name="ppt_link" id="ppt_link">
+                    <button type="button" id="ppt_button" onclick="changePPT()"> Change </button>
+                    <iframe id="ppts" src="about:blank" width="100%" height="0px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>        </article>
                 </div>
             </div>
+            <div class = "col-sm-6">
+                <div class="right-half">
+                    <div class="tabbed-module">
+                        <ul class="tabs">
+                            <li class="selected">
+                                <a href="#image1">📷 Image</a>
+                            </li>
+                            <li>
+                                <a href="#video2">🎥 Video</a>
+                            </li>
+                            <li>
+                                <a href="#pdf3">📰 Word Doc</a>
+                            </li>
+                            <li>
+                                <a href="#code4">⌨ Code</a>
+                            </li>
+                        </ul>
+
+                        <div class="tabs-content">
+                            <div id="image1" class="selected">
+                                <br>
+                                <img id ="images" src="" /> <br>
+                                <label for="image_link"> Insert Image Link (.png .jpg .gif) </label> <br>
+                                <input type="text" name="image_link" id="image_link">
+                                <button type="button" class = "conbutton" id="image_button" onclick="changeImage()"> Change </button>
+                            </div>
+
+                            <script>
+
+                                function changeImage(){
+                                    var image_content = document.getElementById("image_link").value;
+                                    var image = document.getElementById("images");
+                                    image.src = image_content;
+                                }
+
+                            </script>
+                            <div id="video2">
+                                <br>
+                                <br>
+                                <iframe id ="videos" width="100%" height="0px" src=""></iframe>
+                                </iframe>
+                                <label for="video_link"> Insert Youtube Video ID </label> <br>
+                                <input type="text" name="video_link" id="video_link">
+                                <button type="button" class = "conbutton" id="content_button" onclick="changeVideo()"> Change </button>
+                            </div>
+
+                            <script>
+
+                                function changeVideo(){
+                                    var video_content = document.getElementById("video_link").value;
+                                    var video = document.getElementById("videos");
+                                    video.style.height = "300px"
+                                    video.src = "https://www.youtube.com/embed/" + video_content;
+
+                                }
+                            </script>
+
+                            <div id="pdf3">
+                                <br>
+                                <br>
+                                <!--****** changed default iframe height to 0px ******-->
+                                <iframe id="docs" src="" width="100%" height="0px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+                                <label for="doc_link"> Insert Microsoft 365 Embedding Code </label> <br>
+                                <input type="text" name="doc_link" id="doc_link">
+                                <button type="button" class = "conbutton" id="doc_button" onclick="changeDoc()"> Change </button>
+                            </div>
+                            <script>
+                                function changeDoc(){
+                                    var doc_content = document.getElementById("doc_link").value;
+                                    doc_content = doc_content.replace('476px','100%');
+                                    doc_content = doc_content.replace('288px','600px');
+                                    var doc = document.getElementById("docs");
+                                    doc_content = doc_content.replace('<iframe', '<iframe id = "docs"')
+                                    doc.outerHTML =  doc_content;
+                                    doc.style.width="100%";
+                                    doc.style.height="600px";
+                                }
+                            </script>
+                            <div id="code4">
+                                <div class="tabbed-module">
+                                    <br>
+                                    <ul class="tabs">
+                                        <li class="selected">
+                                            <a href="#code1" >Python</a>
+                                        </li>
+                                        <li>
+                                            <a href="#code2">Java</a>
+                                        </li>
+                                        <li>
+                                            <a href="#code3">SQL</a>
+                                        </li>
+                                        <li>
+                                            <a href="#code5">C/C++</a>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                    <div class="tabs-content">
+                                        <div id="code1" class="selected">
+                                            <iframe id='py1' src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                                            <label for="python_link"> Insert Content Embedding Link </label> <br>
+                                            <input type="text" name="python_link" id="python_link">
+                                            <button type="button" class="conbutton" id="python_button" onclick="changePython()"> Change </button>
+                                        </div>
+
+                                        <script>
+
+                                            function changePython(){
+                                                var python_content = document.getElementById("python_link").value;
+                                                var python = document.getElementById("py1");
+                                                python.outerHTML = python_content;
+                                            }
+                                        </script>
+
+                                        <div id="code2">
+                                            <iframe id="ja1" src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                                            <label for="java_link"> Insert Content Embedding Link </label> <br>
+                                            <input type="text" name="java_link" id="java_link">
+                                            <button type="button" id="java_button" onclick="changeJava()"> Change </button>
+                                        </div>
+
+                                        <script>
+
+                                            function changeJava(){
+                                                var java_content = document.getElementById("java_link").value;
+                                                var java = document.getElementById("ja1");
+                                                java.outerHTML = java_content;
+                                            }
+                                        </script>
+
+                                        <div id="code3">
+                                            <div style="position: absolute; height: 100%; width: 50%">
+                                                <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
+                                            </div>
+
+
+                                            <!--<pre><code>&lt;strong&gt;FOO&lt;/strong&gt;</code></pre>-->
+
+                                            <!-- <div style="position: absolute; height: 100%; width: 50%">
+                                        <sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
+                                      </div> -->
+                                            <!-- SELECT * FROM Students limit 5; -->
+
+                                            <!--<img alt="image 4" src="https://pixabay.com/static/uploads/photo/2010/12/06/22/fighter-jet-1013_960_720.jpg" />-->
+                                        </div>
+                                        <div id="code5">
+                                            <iframe src="about:blank" id="cc" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                                            <label for="cc_link"> Insert Content Embedding Link </label> <br>
+                                            <input type="text" name="cc_link" id="cc_link">
+                                            <button type="button" id="cc_button" onclick="changeCC()"> Change </button>
+                                        </div>
+
+                                        <script>
+
+                                            function changeCC(){
+                                                var cc_content = document.getElementById("cc_link").value;
+                                                var cc = document.getElementById("cc");
+                                                cc.outerHTML = cc_content;
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div></div>
         </div>
-
     </div>
-</section>
-
+</div>
 <script src="{{ url_for('static', filename='js/js.js') }}" ></script>
 </body>
