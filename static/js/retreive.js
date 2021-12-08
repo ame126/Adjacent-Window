@@ -72,10 +72,30 @@ function replace_urls(element, url){
 	element.src = url;
 }
 
-$('#retrieve_div').click(function(){
+//clear the container element
+// function clear_element(element){
+//
+// }
+//rebuild containers or replace by clearing the current container
+$(document).ready(function(){
 
-	window.location.href="http://127.0.0.1:5000/retrieve"
-})
+	data = JSON.parse(data);
+	console.log(data['images'])
+	let image_element = document.getElementsByClassName('images');
+	replace_urls(image_element, data['images']);
+	let video_element = document.getElementById('vid1');
+	replace_urls(image_element, data['videos']);
+	let docs_element = document.getElementById('doc1');
+	replace_urls(docs_element, data['documents']);
+	document.getElementById('ppts').src = data['presentation'];
+	// replace_urls(ppt_element, data['presentation']);
+
+
+	// $(".videos").attr("src", data['videos']);
+	$(".images").attr("src", data['images']);
+	// $(".documents").attr("src", data['documents']);
+	// $("#ppts").attr("src", data['presetation']);
+});
 
 
 

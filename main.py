@@ -1,12 +1,10 @@
-from flask import Flask, render_template, session, request, redirect, url_for, jsonify, make_response
-import flask
 import mysql.connector
-from mysql.connector.errors import Error
-from datetime import timedelta
-from werkzeug.utils import secure_filename
-from config import Config
 import os
 import json
+from flask import Flask, render_template, session, request, redirect, url_for, jsonify
+from mysql.connector.errors import Error
+from datetime import timedelta
+from config import Config
 
 '''Initialise the flask app '''
 app = Flask(__name__)
@@ -46,11 +44,10 @@ def create_db():
     except Error as err:
         print("Error code: ", err.errno)
         print("Message", err.msg)
-    finally:
-        mydb.close()
 
 
 def convert_to_string(data):
+    # print(data.keys())
     for keys in data:
         temp_val = "*#*".join(data[keys])
         data[keys] = "'" + temp_val + "'"
@@ -73,7 +70,7 @@ def record_exists(username):
         cursor.execute(query)
         results = cursor.fetchall()
         mydb.close()
-        return len(results) > 0
+        return results[0][0] > 0
     except:
         print("Error for record check")
 
@@ -83,7 +80,6 @@ def insert_record():
     data = request.get_json()
 
     data_transformed = convert_to_string(data)
-
     username = session['username']
     if not record_exists(username):
         # insert
@@ -98,12 +94,13 @@ def insert_record():
             )
 
             cursor = mydb.cursor()
-            query = "INSERT INTO userfiles" + " (username, images, videos, documents)" + " VALUES (" + \
+            query = "INSERT INTO userfiles" + " (username, images, videos, documents, presentation)" + " VALUES (" + \
                     "'" + session['username'] + "'," + data_transformed['images'] + "," + data_transformed[
                         'videos'] + "," + \
-                    data_transformed['docs'] + ");"
+                    data_transformed['docs'] + "," + data_transformed['presentation'] + ");"
             cursor.execute(query)
-            results = cursor.fetchall()
+            mydb.commit()
+            # results = cursor.fetchall()
             mydb.close()
             return jsonify(sucess=True)
         except Error as err:
@@ -111,7 +108,8 @@ def insert_record():
             print("Message", err.msg)
     else:
         # update record
-        print("Update record for username")
+        # print("Updated record for username")
+        print(data_transformed['presentation'])
         try:
             mydb = mysql.connector.connect(
                 host="127.0.0.1",
@@ -125,9 +123,10 @@ def insert_record():
             cursor = mydb.cursor()
             query = "UPDATE userfiles " + "SET images = " + data_transformed['images'] + ", videos = " + \
                     data_transformed[
-                        'videos'] + ", documents = " + data_transformed['docs'] + "WHERE username = '" + username + "';"
+                        'videos'] + ", documents = " + data_transformed['docs'] + ", presentation = " + data_transformed['presentation'] + " WHERE username = '" + username + "';"
 
             cursor.execute(query)
+            mydb.commit()
             # results = cursor.fetchall()
             mydb.close()
 
@@ -171,17 +170,23 @@ def login():
         elif login_cred[username] != password:
             return render_template('login.html', message="Invalid username/password")
         else:
-            flask.flash("Logged in Successfully")
-            # retrieve data of the user
-            mydb = get_mysql_connector()
-            query = "SELECT images, videos, documents from userfiles WHERE username = '" + session['username'] + "';"
-            cursor = mydb.cursor()
-            cursor.execute(query)
-            results = cursor.fetchall()
-            data = {'images': results[0][0], 'videos': results[0][1], 'documents': results[0][2]}
-            return render_template("index.html", data=json.dumps(data))
+            return render_template('default.html')
     else:
         return render_template('login.html')
+
+
+@app.route("/retrieve", methods=['GET'])
+def retrieve_data():
+    username = session['username']
+    mydb = get_mysql_connector()
+    query = "SELECT images, videos, documents, presentation from userfiles WHERE username = '" + session['username'] + "';"
+    cursor = mydb.cursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    data = {'images': results[0][0], 'videos': results[0][1], 'documents': results[0][2],
+            'presentation': results[0][3]}
+    return render_template("index.html", data=json.dumps(data))
+
 
 
 def allowed_file(filename):
@@ -189,34 +194,13 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flask.flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flask.flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, filename))
-            # flask.flash(f'{filename.rsplit(".",1)[1]}File Uploaded Successfully')
-        return jsonify(success=True)
-    return jsonify(success=True)
-
-
 @app.route('/logout/<username>', methods=['GET', 'POST'])
 def logout(username):
     session.pop(username)
-    print(session.keys())
 
 
-@app.errorhandler(404)
+
+@app.errorhandler(Exception)
 def handle_bad_request(e):
     """
     Handle error codes and relevant pages
