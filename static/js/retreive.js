@@ -25,20 +25,20 @@ $(document).on('click', '.tabs > li > a', function(e) {
 $('#save_files').click(function()
 {
 	let final_data = {}
-	let image_elements = document.getElementById("images");
+	let image_elements = document.getElementById("image1pic");
 	let image_urls = []
 	image_urls.push(image_elements.src)
 
 	final_data['images'] = image_urls
 	// console.log(image_urls);
-	let video_elements = document.getElementById("videos");
+	let video_elements = document.getElementById("vid1");
 	let video_urls = []
 
 	video_urls.push(video_elements.src)
 
 	final_data['videos'] = video_urls
 
-	let docs_elements = document.getElementById("docs");
+	let docs_elements = document.getElementById("doc1");
 	let docs_urls = []
 	docs_urls.push(docs_elements.src)
 	final_data['docs'] = docs_urls

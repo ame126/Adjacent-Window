@@ -24,6 +24,22 @@
 			<article>
 				<h1>Presentation Slides Box</h1>
 				<br>
+				<script>
+					function changePPT(){
+						var ppt_content = document.getElementById('ppt_link').value;
+						ppt_content = ppt_content.replace('350px','100%');
+						ppt_content = ppt_content.replace('221px','500px');
+						ppt_content = ppt_content.replace('<iframe', '<iframe id = "ppts"')
+						var ppt = document.getElementById('ppts');
+						ppt.outerHTML = ppt_content;
+						ppt.style.width="100%";
+						ppt.style.height="500px";
+
+					}
+				</script>
+				<label for="ppt_link"> Insert Microsoft 365 Embedding Code </label> <br>
+				<input type="text" name="ppt_link" id="ppt_link">
+				<button type="button" id="ppt_button" onclick="changePPT()"> Change </button>
 				<iframe id="ppts"  width="610px" height="367px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
 				<p>This is where the normal presentation slide will be and include the links to shift through the adjacent window tabs.</p>
 				<br>
@@ -32,85 +48,131 @@
 		<div class="col">
 			<div class="tabbed-module">
 				<div id = "style_nav">
-						<ul class="tabs">
-							<li class="selected">
-								<a href="#image1">📷 Image</a>
-							</li>
-							<li>
-								<a href="#video2">🎥 Video</a>
-							</li>
-							<li>
-								<a href="#pdf3">📰 Word Doc</a>
-							</li>
-							<li>
-								<a href="#code4">⌨ Code</a>
-							</li>
-						</ul>
+					<ul class="tabs">
+						<li class="selected">
+							<a href="#image1">📷 Image</a>
+						</li>
+						<li>
+							<a href="#video2">🎥 Video</a>
+						</li>
+						<li>
+							<a href="#pdf3">📰 Word Doc</a>
+						</li>
+						<li>
+							<a href="#code4">⌨ Code</a>
+						</li>
+					</ul>
 
 				</div>
 				<div class="tabs-content">
-						<div id="image1" class="selected">
-							<!--					<img alt="Hill Center" src="https://www.cs.rutgers.edu/images/computer-science.jpg" />-->
-							<img class = "images" id ="image1pic" src="" /> <br>
-						</div>
-						<div id="video2">
-							<iframe class = "videos" id ="vid1" width="100%" height="315"
-									src="https://www.youtube.com/embed/XQAFtePwIf8">
-							</iframe>
-						</div>
-						<div id="pdf3">
-							<iframe class = "docs" id="doc1" src="" width="100%" height="600px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-						</div>
+					<div id="image1" class="selected">
+						<!--					<img alt="Hill Center" src="https://www.cs.rutgers.edu/images/computer-science.jpg" />-->
+						<img class = "images" id ="image1pic" src="" /> <br>
+						<label for="image_link"> Insert Image Link (.png .jpg .gif) </label> <br>
+						<input type="text" name="image_link" id="image_link">
+						<button type="button" class = "conbutton" id="image_button" onclick="changeImage()"> Change </button>
 
-						<div id="code4">
+					</div>
+					<script>
 
-							<div class="tabbed-module">
-								<nav>
-									<ul class="tabs">
-										<li class="selected">
-											<a href="#code1">Python</a>
-										</li>
-										<li>
-											<a href="#code2">Java</a>
-										</li>
-										<li>
-											<a href="#code3">SQL</a>
-										</li>
-										<li>
-											<a href="#code5">C/C++</a>
-										</li>
-									</ul>
-								</nav>
-								<div class="tabs-content">
-									<div id="code1" class="selected">
-										<iframe src="https://trinket.io/embed/python/8dd1f8bb26" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+						function changeImage(){
+							var image_content = document.getElementById("image_link").value;
+							var image = document.getElementById("image1pic");
+							image.src = image_content;
+						}
 
-									</div>
+					</script>
 
-									<div id="code2">
-										<iframe src="https://www.jdoodle.com/iembed/v0/hyN" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+					<div id="video2">
+						<iframe class = "videos" id ="vid1" width="100%" height="315"
+								src="https://www.youtube.com/embed/XQAFtePwIf8">
+						</iframe>
+						<label for="video_link"> Insert Youtube Video ID </label> <br>
+						<input type="text" name="video_link" id="video_link">
+						<button type="button" class = "conbutton" id="content_button" onclick="changeVideo()"> Change </button>
 
-									</div>
+					</div>
+					<script>
 
-									<div id="code3">
-										<div style="position: absolute; height: 100%; width: 50%">
-											<sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
-										</div>
-									</div>
+						function changeVideo(){
+							var video_content = document.getElementById("video_link").value;
+							var video = document.getElementById("vid1");
+							video.style.height = "300px"
+							video.src = "https://www.youtube.com/embed/" + video_content;
+
+						}
+					</script>
+
+					<div id="pdf3">
+						<iframe class = "docs" id="doc1" src="" width="100%" height="600px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+						<label for="doc_link"> Insert Microsoft 365 Embedding Code </label> <br>
+						<input type="text" name="doc_link" id="doc_link">
+						<button type="button" class = "conbutton" id="doc_button" onclick="changeDoc()"> Change </button>
+
+					</div>
+					<script>
+						function changeDoc(){
+							var doc_content = document.getElementById("doc_link").value;
+							doc_content = doc_content.replace('476px','100%');
+							doc_content = doc_content.replace('288px','600px');
+							var doc = document.getElementById("docs");
+							doc_content = doc_content.replace('<iframe', '<iframe id = "docs"')
+							doc.outerHTML =  doc_content;
+							doc.style.width="100%";
+							doc.style.height="600px";
+						}
+					</script>
+
+
+					<div id="code4">
+
+						<div class="tabbed-module">
+							<nav>
+								<ul class="tabs">
+									<li class="selected">
+										<a href="#code1">Python</a>
+									</li>
+									<li>
+										<a href="#code2">Java</a>
+									</li>
+									<li>
+										<a href="#code3">SQL</a>
+									</li>
+									<li>
+										<a href="#code5">C/C++</a>
+									</li>
+								</ul>
+							</nav>
+							<div class="tabs-content">
+								<div id="code1" class="selected">
+									<iframe src="https://trinket.io/embed/python/8dd1f8bb26" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 								</div>
-								<div id="code5">
-									<iframe src="https://www.jdoodle.com/embed/v0/3ZHu" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+								<div id="code2">
+									<iframe src="https://www.jdoodle.com/iembed/v0/hyN" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
 								</div>
+
+								<div id="code3">
+									<div style="position: absolute; height: 100%; width: 50%">
+										<sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
+									</div>
+								</div>
+
+							</div>
+							<div id="code5">
+								<iframe src="https://www.jdoodle.com/embed/v0/3ZHu" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 </section>
-
-<script src="{{ url_for('static', filename='js/retreive.js') }}" ></script>
 <button id="save_files"class="btn btn-info active" role="button" aria-pressed="true" >Save State</button>
+<script src="{{ url_for('static', filename='js/retreive.js') }}" ></script>
+
 </body>
