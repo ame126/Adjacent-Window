@@ -95,7 +95,7 @@
                                 function changeVideo(){
                                     var video_content = document.getElementById("video_link").value;
                                     var video = document.getElementById("videos");
-                                    video.style.height = "300px"
+                                    video.style.height = "315px"
                                     video.src = "https://www.youtube.com/embed/" + video_content;
 
                                 }
@@ -154,6 +154,7 @@
                                                 var python_content = document.getElementById("python_link").value;
                                                 var python = document.getElementById("py1");
                                                 python.outerHTML = python_content;
+                                                python.style.height="600px";
                                             }
                                         </script>
 
@@ -169,7 +170,7 @@
                                             function changeJava(){
                                                 var java_content = document.getElementById("java_link").value;
                                                 var java = document.getElementById("ja1");
-                                                java.outerHTML = java_content;
+                                                java.src = java_content;
                                             }
                                         </script>
 
@@ -200,7 +201,8 @@
                                             function changeCC(){
                                                 var cc_content = document.getElementById("cc_link").value;
                                                 var cc = document.getElementById("cc");
-                                                cc.outerHTML = cc_content;
+                                                cc.src = cc_content;
+                                                cc.style.height="600px";
                                             }
                                         </script>
                                     </div>

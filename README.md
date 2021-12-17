@@ -2,9 +2,9 @@
 
 This project is a web application tool that allows the user to create presentations that display related content of different media types parallel to a slideshow in an adjacent window.
 
-Please read this 
+Please read this guide in its entirety to answer all your questions related to installation, setup, and running of the application locally.
 
-For more details and navigation of the front-end of the tool, please refer to the report: 
+For more details and navigation of the front-end of the tool, please refer to the project report.
 
 ## Installation and Setup
 
