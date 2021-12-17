@@ -21,7 +21,8 @@ config_object = Config()
 login_cred = {
     "testuser1": "test123",
     "testuser2": "test456",
-    "testuser3": "test789"
+    "testuser3": "test789",
+    "newtest": "newtest"
 }
 
 

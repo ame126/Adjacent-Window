@@ -1,4 +1,4 @@
 Flask~=1.1.2
 flask-login
-werkzeug
+Werkzeug
 mysql-connector-python~=8.0.23
