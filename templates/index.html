@@ -49,16 +49,16 @@
 			<div class="tabbed-module">
 				<div id = "style_nav">
 					<ul class="tabs">
-						<li class="selected">
+						<li class="selected" style="display: block; object-fit:contain">
 							<a href="#image1">📷 Image</a>
 						</li>
-						<li>
+						<li style="display: block; object-fit:contain">
 							<a href="#video2">🎥 Video</a>
 						</li>
-						<li>
+						<li style="display: block; object-fit:contain">
 							<a href="#pdf3">📰 Word Doc</a>
 						</li>
-						<li>
+						<li style="display: block; object-fit:contain">
 							<a href="#code4">⌨ Code</a>
 						</li>
 					</ul>
@@ -125,44 +125,89 @@
 
 
 					<div id="code4">
-
 						<div class="tabbed-module">
-							<nav>
-								<ul class="tabs">
-									<li class="selected">
-										<a href="#code1">Python</a>
-									</li>
-									<li>
-										<a href="#code2">Java</a>
-									</li>
-									<li>
-										<a href="#code3">SQL</a>
-									</li>
-									<li>
-										<a href="#code5">C/C++</a>
-									</li>
-								</ul>
-							</nav>
+							<br>
+							<ul class="tabs">
+								<li class="selected" style="display: flex; object-fit:contain">
+									<a href="#code1" >Python</a>
+								</li>
+								<li style="display: flex; object-fit:contain">
+									<a href="#code2">Java</a>
+								</li>
+								<li style="display: flex; object-fit:contain">
+									<a href="#code3">SQL</a>
+								</li>
+								<li style="display: flex; object-fit:contain">
+									<a href="#code5">C/C++</a>
+								</li>
+							</ul>
+							<br>
 							<div class="tabs-content">
 								<div id="code1" class="selected">
-									<iframe src="https://trinket.io/embed/python/8dd1f8bb26" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
+									<iframe id='py1' src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+									<label for="python_link"> Insert Content Embedding Link </label> <br>
+									<input type="text" name="python_link" id="python_link">
+									<button type="button" class="conbutton" id="python_button" onclick="changePython()"> Change </button>
 								</div>
+
+								<script>
+
+									function changePython(){
+										var python_content = document.getElementById("python_link").value;
+										var python = document.getElementById("py1");
+										python.outerHTML = python_content;
+										python.style.height="600px";
+									}
+								</script>
 
 								<div id="code2">
-									<iframe src="https://www.jdoodle.com/iembed/v0/hyN" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
+									<iframe id="ja1" src="about:blank" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+									<label for="java_link"> Insert Content Embedding Link </label> <br>
+									<input type="text" name="java_link" id="java_link">
+									<button type="button" id="java_button" onclick="changeJava()"> Change </button>
 								</div>
+
+								<script>
+
+									function changeJava(){
+										var java_content = document.getElementById("java_link").value;
+										var java = document.getElementById("ja1");
+										java.src = java_content;
+										java.style.height="600px";
+									}
+								</script>
 
 								<div id="code3">
 									<div style="position: absolute; height: 100%; width: 50%">
 										<sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
 									</div>
+
+
+									<!--<pre><code>&lt;strong&gt;FOO&lt;/strong&gt;</code></pre>-->
+
+									<!-- <div style="position: absolute; height: 100%; width: 50%">
+								<sql-scratchpad api-url="https://demo.gethue.com" username="demo" password="demo" dialect="mysql" />
+							</div> -->
+									<!-- SELECT * FROM Students limit 5; -->
+
+									<!--<img alt="image 4" src="https://pixabay.com/static/uploads/photo/2010/12/06/22/fighter-jet-1013_960_720.jpg" />-->
+								</div>
+								<div id="code5">
+									<iframe src="about:blank" id="cc" width="100%" height="0px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+									<label for="cc_link"> Insert Content Embedding Link </label> <br>
+									<input type="text" name="cc_link" id="cc_link">
+									<button type="button" id="cc_button" onclick="changeCC()"> Change </button>
 								</div>
 
-							</div>
-							<div id="code5">
-								<iframe src="https://www.jdoodle.com/embed/v0/3ZHu" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+								<script>
+
+									function changeCC(){
+										var cc_content = document.getElementById("cc_link").value;
+										var cc = document.getElementById("cc");
+										cc.src = cc_content;
+										cc.style.height="600px";
+									}
+								</script>
 							</div>
 						</div>
 					</div>

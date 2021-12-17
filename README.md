@@ -101,8 +101,6 @@ The landing page should be the login page of the application. A sample login is 
 
 After login, the user will be directed to the default presentation page with the option of starting a new presentation from scratch (adding embedding links) or retrieving a previously saved presentation, accessible from the two buttons at the top of the screen.
 
-** Please note that each user can only have up to 1 presentation saved in the database and saving a new presentation will override previous projects. The Retrieve button will display the most recently saved presentation for the logged in user. If you would like to save multiple presentations, we recommend creating a new login user for each presentation and saving the credentials. **
-
 ## Error Handling
 
 If all the above steps were followed correctly, the tool should run properly on a local device and database. However, the following changes can be made to the source code but it is only advised *if* no other option is working.
@@ -115,6 +113,14 @@ pip install -U Werkzeug
 
 - In **main.py**, changing all instances of the *host* field when connecting to the database (6 in total). It is set to **'localhost'/'127.0.0.1'** by default, but can be altered if the port is changed to an online database or otherwise.
 - In **launch.json**, details of the launching the Flask App environment can be changed if necessary. The most likely change would be to change the **Flask App** assignment to **"main.py"** on line 13.
+
+## Final Notes
+
+Please keep the following in mind when creating and sharing presentations.
+
+- Please note that each user can only have up to 1 presentation saved in the database and saving a new presentation will override previous projects. The Retrieve button will display the most recently saved presentation for the logged in user. If you would like to save multiple presentations, we recommend creating a new login user for each presentation and saving the credentials.
+
+- As of now, we are not supporting the option to save the embedded code snippets with the rest of the presentation. The reasoning behind this is because the online code editors we are embedding from do not currently have licensing agreements with Rutgers University like Microsoft Office 365, so if you are planning on running code in your presentation we recommend saving the embedding code somewhere easily accessible.
 
 ## Authors and Acknowledgement
 

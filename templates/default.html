@@ -17,7 +17,7 @@
             <div id ="retrieve_div" ><button id="retrieve_files"class="btn btn-info active" role="button" aria-pressed="true" >Retrieve</button></div>
         </div>
     </div>
-    <div class = row">
+    <div class = "row">
         <div id = "container_style">
             <div class = "col-sm-6">
                 <div class="left-half">
@@ -46,18 +46,18 @@
             </div>
             <div class = "col-sm-6">
                 <div class="right-half">
-                    <div class="tabbed-module" style="height:max-content; display: flex">
+                    <div class="tabbed-module">
                         <ul class="tabs">
-                            <li class="selected">
+                            <li class="selected" style="display: block; object-fit:contain">
                                 <a href="#image1">📷 Image</a>
                             </li>
-                            <li>
+                            <li style="display: block; object-fit:contain">
                                 <a href="#video2">🎥 Video</a>
                             </li>
-                            <li>
+                            <li style="display: block; object-fit:contain">
                                 <a href="#pdf3">📰 Word Doc</a>
                             </li>
-                            <li>
+                            <li style="display: block; object-fit:contain">
                                 <a href="#code4">⌨ Code</a>
                             </li>
                         </ul>
@@ -126,16 +126,16 @@
                                 <div class="tabbed-module">
                                     <br>
                                     <ul class="tabs">
-                                        <li class="selected">
+                                        <li class="selected" style="display: flex; object-fit:contain">
                                             <a href="#code1" >Python</a>
                                         </li>
-                                        <li>
+                                        <li style="display: flex; object-fit:contain">
                                             <a href="#code2">Java</a>
                                         </li>
-                                        <li>
+                                        <li style="display: flex; object-fit:contain">
                                             <a href="#code3">SQL</a>
                                         </li>
-                                        <li>
+                                        <li style="display: flex; object-fit:contain">
                                             <a href="#code5">C/C++</a>
                                         </li>
                                     </ul>
@@ -171,6 +171,7 @@
                                                 var java_content = document.getElementById("java_link").value;
                                                 var java = document.getElementById("ja1");
                                                 java.src = java_content;
+                                                java.style.height="600px";
                                             }
                                         </script>
 
